@@ -1,0 +1,21 @@
+<div ng-switch="field.isDetailLink() && hasRelatedAdmin()">
+    
+    <table class="grid table table-condensed table-hover table-striped">
+        <tr>
+
+            <td ng-repeat="col in columns" > {{col['label']}}  </td>
+            <td></td> 
+        </tr>
+       
+        <tr ng-switch-when="true" ng-repeat="ref in entry.listValues[field.name()] track by $index">
+            <td ng-repeat="col in columns"> {{ref[col['name']]}} </td>
+            <td> <a ng-click="gotoReference(entry.values[field.name()][$index])" class="multiple">link</a></td>
+        </tr>
+    </table>
+
+    <span ng-switch-default ng-repeat="ref in entry.listValues[field.name()] track by $index">
+        <span class="label label-default">
+            {{ ref }}
+        </span>
+    </span>
+</div>

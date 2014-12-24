@@ -1,0 +1,19 @@
+<div ng-switch="field.isDetailLink() && hasRelatedAdmin()">
+    <ul>
+    <span ng-switch-when="true" ng-repeat="ref in entry.listValues[field.name()] track by $index">
+        <li>
+        <a ng-click="gotoReference(entry.values[field.name()][$index])" class="multiple">
+            <span class="label label-default">
+                {{ ref }} - {{field.name()}}
+            </span>
+        </a>
+        </li>
+    </span>
+    </ul>
+
+    <span ng-switch-default ng-repeat="ref in entry.listValues[field.name()] track by $index">
+        <span class="label label-default">
+            {{ ref }}
+        </span>
+    </span>
+</div>

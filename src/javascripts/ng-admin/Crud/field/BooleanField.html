@@ -1,0 +1,6 @@
+<input id="{{ field.name() }}"
+       name="{{ field.name() }}"
+       type="checkbox"
+       class="{{ field.getCssClasses() }}"
+       ng-model="entry.values[field.name()]"
+       ng-required="field.validation().required" />
