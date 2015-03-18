@@ -1,0 +1,47 @@
+
+<div>
+    <table class="table">
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Value</th>
+            <th></th>
+            <th></th>
+        </tr>
+        <tr ng-repeat="item in records" ng-include="getTemplate(item)"></tr>
+        <tr>
+            <td><a href ng:click="addItem()" class="btn btn-small">Add item</a></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+    </table>
+    <script type="text/ng-template" id="display">
+    
+        <td>{{item.id}}</td>  
+        <td>{{item.name}}</td>
+        <td>{{item.value}}</td>
+        
+        <td>    
+        <button ng-click="editItem(item)">Edit</button>
+        </td>
+        <td>
+        <button ng:click="removeItem($index)">Delete</button>
+        </td>
+    </script>
+
+    <script type="text/ng-template" id="edit">
+    
+        <td>{{item.id}}</td>  
+        <td><input type="text" ng:model="item.name" class="input-small"></td>
+        <td><input type="text" ng:model="item.value" class="input-small"></td>
+        <td>
+        <button ng:click="saveItem($idx)">Save</button>
+        </td>
+        <td>
+        <button ng:click="reset()">Cancel</button>
+        </td>
+    </script>
+    <div>Total: {{records.length}}</div>
+</div>

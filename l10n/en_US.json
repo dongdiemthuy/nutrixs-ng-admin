@@ -1,0 +1,135 @@
+{
+   "NgAdmin": {
+      "fields": {
+        "nutrient": {
+          "code": "Code",
+          "name": "Name",
+          "unitType": "Unit Type"
+        },
+        "ingredient": {
+          "code": "Code",
+          "label": "Name",
+          "nutrientContentList": "Nutrient Content List",
+          "amount": "Amount",
+          "nutrMin": "Nutrient Min",
+          "nutrMax": "Nutrient Max",
+          "numDataPts": "Number of Data Points",
+          "stdError": "Standard Error"
+        },
+        "user": {
+          "username": "User Name",
+          "fullname": "Full Name",
+          "password": "Password",
+          "re_password": "Retype password",
+          "email": "Email",
+          "enable": "Enable",
+          "crewIds": "Group Id"
+        },
+        "crew": {
+          "name": "Name",
+          "description": "Description ",
+          "spotIds": "Site",
+          "globalRoleIds": "Global Role"
+        },
+        "spot":{
+          "name": "Name",
+          "description": "Description",
+          "code": "Code"
+        },
+        "role":{
+          "name": "Name",
+          "description": "Description",
+          "code": "Code",
+          "permissionIds": "Permission Id"
+        }
+      },
+
+      "titles": {
+        "nutrient": {
+          "title": "Recent nutrients",
+          "titles": "Nutrient"
+        },
+        "ingredient": {
+          "title":"Recent ingredients",
+          "titles": "Ingredient"
+        },
+        "role": {
+          "title":"Role"
+        },
+        "spot": {
+          "title":"Site"
+        },
+        "crew": {
+          "title":"Group"
+        },
+        "user": {
+          "title":"User"
+        },
+        "permission": {
+          "title":"Permission"
+        }
+      }
+    },
+
+  "ngAdmin": {
+    "static": {
+      "DELETE": "Delete",
+      "BACK": "Back",
+      "EDIT": "Edit",
+      "SAVE": "Save",
+      "CANCEL": "Cancel",
+      "SHOW_BUT": "Show",
+      "SHOW_INF": "Show",
+      "SHOW_ALL": "Show all",
+      "LIST": "List",
+      "CREATE": "Create",
+      "CREATE_NEW": "Create new",
+      "SUBMIT":"Submit",
+      "ARE_SURE":"Are you sure ?",
+      "YES":"Yes",
+      "NO":"No",
+      "SAVE_CHANGES":"Save Changes",
+      "ACTIONS":"Actions",
+      "FILTER":"Filter",
+      "DETAIL":"Detail",
+      "DASHBOARD":"Dashboard"
+      
+    },
+    
+    "entities": {
+      "ingredient": "Ingredient",
+      "nutrient": "Nutrient",
+      "permission": "Permission",
+      "role": "Role",
+      "spot": "Site",
+      "crew": "Group",
+      "user": "User"
+    },
+    "notification": {
+      "success": "Changes successfully saved."
+    }
+    
+  },
+
+
+"load" : {
+  "static" : {
+    "TITLE" : "How to load static files?",
+    "HEADER" : "Search Nutrient",
+    "SUBHEADER" : "So, you can load only those languages, which will be used.",
+    "TEXT" : "This is only some text to fill the space.",
+    "ONLY_EN": "only english",
+    "EN_RU": "EN and RU - EN Edition"
+  },
+  "predefined" : {
+    "TITLE" : "How to use lazzy loading without autoupload?",
+    "HEADER" : "You can predefine a default language while still using a lazzy loading.",
+    "SUBHEADER" : "This way module will not load a default language from server once more."
+  },
+  "dynamic" : {
+    "TITLE" : "How to load dynamic files?",
+    "HEADER" : "The module can lazzy load a translations table from the dynamic page.",
+    "SUBHEADER" : "It will use the \"lang\" request param passed into GET."
+  }
+}
+}

@@ -6,15 +6,8 @@ define(function (require) {
     var referenceManyAggregationFieldView = require('text!./ReferenceManyAggregationField.html');
 
     function ReferenceManyAggregationField($scope) {
-        $scope.records = {
-            selected: {},
-            mtag: [{
-                "id": 'abce-dadfd-edbdhd',
-                "name": "Sport",
-                "published": 1,
-                "value": "12,8g"
-            }]
-        };
+        $scope.selected = {};
+       //khai bao controller ben ngoai o FormController          
     }
 
     ReferenceManyAggregationField.prototype.contains = function (collection, item) {
@@ -30,37 +23,33 @@ define(function (require) {
 
         return false;
     };
-    
-
-    // function ReferenceManyAggregationFieldDirective() {
-    //     return {
-    //         restrict: 'E',
-    //         template: referenceManyAggregationFieldView,
-    //         controller: ReferenceManyAggregationField,
-    //         controllerAs: 'referenceManyAggregationField',
-    //         link: function (scope) {
-    //             scope.choices = scope.field.getChoices();
-    //         }
-    //     };
-    // }
-
-
-    // ReferenceManyAggregationFieldDirective.$inject = [];
-
-    //return ReferenceManyAggregationFieldDirective;
 
     function ReferenceManyAggregationFieldDirective() {
         return {
             restrict: 'E',
             controller: ReferenceManyAggregationField,
             controllerAs: 'referenceManyAggregationField',
-            scope: { records: '=' },
+            scope: { records: '=', targets: '=', columns: '='},
             template: referenceManyAggregationFieldView,
-            //templateUrl: 'nutrixs-ng-admin/src/javascripts/ng-admin/field/ReferenceManyAggregationField.html',
             replace: true,
-            link:  function($scope, element, attrs) {
-                console.log("qqqqqqq");
-                var generateUUID = function() {
+            link: function($scope, element, attrs) {
+                $scope.selected = {};
+
+                var evalExpression = function() {
+                    for(var i=0; i<$scope.columns.length; i++) {
+                        if ($scope.columns[i]['type'] == 'expression') {
+        
+                            for(var j=0; j<$scope.records.length; j++) {
+                                // evaluates expression
+                                var result = $scope.$eval($scope.columns[i]['expression'], $scope.records[j]);
+                                $scope.records[j][$scope.columns[i]['name']] = result;
+                            }
+                        }
+                    }
+                }
+
+
+                var generateUUID = function(){
                     var d = new Date().getTime();
                     var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.
                         replace(/[xy]/g, function(c) {
@@ -69,44 +58,70 @@ define(function (require) {
                           return (c=='x' ? r : (r&0x3|0x8)).toString(16);
                         });
                       return uuid;
+                  };
+
+                var initColumns = function() {
+                    if ($scope.records == null) {
+                        $scope.records = [];
+                    }
+                    var targets = $scope.targets;
+                    for(var i=0; i<targets.length; i++) {
+                        var found = false;
+                        for(var k=0; k<$scope.records.length; k++) {
+                            if (targets[i].id == $scope.records[k].id) {
+                                found = true;
+                                break;
+                            }
+                        }
+                        if (!found) {
+                            var newItem = {
+                                id: targets[i].id,
+                                name: targets[i].name
+                            };
+                            $scope.records.push(newItem);
+                        }
+                    }
+                  
                 };
-          
-                $scope.addItem = function() {
-                    console.log("aaaaa:" + $scope.records.mtag.length);
-                    var newItem = {
-                        id: generateUUID(),
-                        name: "",
-                        published: 1
-                    };
-                    $scope.records.mtag.push(newItem);
-                    $scope.records.selected = newItem;
-                },
 
+                initColumns();
+
+                $scope.checkDataFieldAvailable = function(record, field) {
+                    if (angular.isDefined(record[field['name']]) && record[field['name']]) return "true";
+                    return "false";
+                }
                 $scope.removeItem = function(index) {
-                    $scope.records.mtag.splice(index, 1);
+                    $scope.records.splice(index, 1);
                 },
 
-                $scope.editItem = function (item) {
-                    $scope.records.selected = angular.copy(item);
+                $scope.editItem = function (contact) {
+                    $scope.selected = angular.copy(contact);
                 },
 
                 $scope.saveItem = function (idx) {
-                    $scope.records.selected = {};
+                    console.log("Saving contact");
+                    $scope.selected = {};
+                    //evalExpression();
                 },
 
                 $scope.reset = function () {
-                    for (var i = 0; i < $scope.records.mtag.length; i++) {
-                        if ($scope.records.mtag[i].id == $scope.records.selected.id) {
-                        $scope.records.mtag[i] = $scope.records.selected;
+                    for (var i = 0; i < $scope.records.length; i++) {
+                      if ($scope.records[i].id == $scope.selected.id) {
+                        $scope.records[i] = $scope.selected;
                         break;
+                      }
                     }
-                    }
-                    $scope.records.selected = {};
+                    $scope.selected = {};
                 },
 
                 $scope.getTemplate = function (item) {
-                    if (item.id === $scope.records.selected.id) return 'edit';
+                    if (item.id === $scope.selected.id) return 'edit';
                         else return 'display';
+                },
+
+                $scope.isExpression = function(field) {
+                    if (field.type == 'expression') return "true";
+                    return "false";
                 }
             }
         };
@@ -115,15 +130,5 @@ define(function (require) {
     ReferenceManyAggregationFieldDirective.$inject = [];
 
     return ReferenceManyAggregationFieldDirective;
-
-
-    // var Controller = function ($scope){
-    //     $scope.tag = {
-    //         selected: {},
-    //         mtag: [{
-    //             "id": 'abce-dadfd-edbdhd',
-    //             "name": "Sport",
-    //             "published": 1
-    //         }]
-    //     };
 });
+

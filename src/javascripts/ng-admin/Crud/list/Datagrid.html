@@ -5,11 +5,11 @@
                 <a ng-click="datagrid.sort(field)">
                     <span class="glyphicon {{ sortDir === 'DESC' ? 'glyphicon-chevron-down': 'glyphicon-chevron-up' }}" ng-if="datagrid.isSorting(field)"></span>
 
-                    {{ field.label() }}
+                    {{ field.label() | translate}}
                 </a>
             </th>
             <th ng-if="listActions">
-                Actions
+                {{'ngAdmin.static.ACTIONS' | translate}}
             </th>
         </tr>
     </thead>

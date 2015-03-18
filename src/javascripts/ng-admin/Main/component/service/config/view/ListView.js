@@ -42,7 +42,7 @@ define(function (require) {
             return response.data.length;
         }
 
-        return response.headers('X-Total-Count') || response.data.length;
+        return response.headers['X-Total-Count'] || response.data.length;
     }
 
     var config = {
@@ -172,6 +172,9 @@ define(function (require) {
      * @return {[Object]}
      */
     ListView.prototype.getMappedValue = function (entries) {
+        //entries = entries.collection;
+        console.log(entries);
+
         if (!entries.length) {
             return [];
         }

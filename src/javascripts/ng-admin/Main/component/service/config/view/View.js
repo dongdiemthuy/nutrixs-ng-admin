@@ -277,6 +277,7 @@ define(function (require) {
 
         // Add identifier value
         if (identifier) {
+            //entry.identifierValue = rawEntry[identifier.name()];
             entry.identifierValue = rawEntry[identifier.name()];
         }
 

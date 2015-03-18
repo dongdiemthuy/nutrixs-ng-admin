@@ -26,7 +26,10 @@ define(function (require) {
     DeleteQueries.prototype.deleteOne = function (view, entityId) {
         var entityName = view.getEntity().name(),
             headers = view.getHeaders();
-
+    
+        if (view.getEntity().relativePath() != null) {
+            this.Restangular.setBaseUrl(this.config.baseApiUrl() + view.getEntity().relativePath());
+        }
         return this.Restangular
             .one(entityName, entityId)
             .remove(null, headers);

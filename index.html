@@ -2,16 +2,35 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>Angular admin</title>
+        <title>Nutrix admin</title>
         <meta name="viewport" content="width=device-width">
 
         <link rel="stylesheet" href="build/ng-admin.min.css">
 
         <script src="src/javascripts/bower_components/angular/angular.js" type="text/javascript"></script>
+        <script src="src/javascripts/bower_components/angular-cookies/angular-cookies.js" type="text/javascript"></script>
+        <script src="src/angular-translate-all/angular-translate/angular-translate.js"></script>
+        <script src="src/angular-translate-all/angular-translate/angular-translate-loader-static-files/angular-translate-loader-static-files.js"></script>
+
         <script src="build/ng-admin.min.js" type="text/javascript"></script>
         <script src="src/javascripts/config.js" type="text/javascript"></script>
     </head>
     <body ng-app="myApp">
+    <!-- 
+        <p ng-controller="changeLanguage" class="ng-scope" style="
+    position: fixed; top: 1em; right: 1em;
+    z-index: 9999;">
+            <a href="#" ng-click="setLang('en_US')">English</a>
+            <!-- | -->
+            <!-- <a href="#" ng-click="setLang('ru_RU')">Русский</a> -->
+            
+        <!--     <a href="#" ng-click="setLang('vi_VN')">Tiếng Việt</a>
+        </p> --> 
+       <!--  <h1 translate="load.static.HEADER"></h1> -->
+        <!-- <h2 translate="load.static.SUBHEADER"></h2> -->
+            <choose-flag> </choose-flag>
+           
         <div ui-view></div>
     </body>
 </html>
+    

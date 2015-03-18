@@ -1,0 +1,148 @@
+{ 
+  
+  "NgAdmin": {
+      "fields": {
+        "nutrient": {
+          "code": "Mã",
+          "name": "Tên chất dinh dưỡng",
+          "unitType": "Đơn vị"
+        },
+        "ingredient": {
+          "code": "Mã",
+          "label": "Tên thực phẩm",
+          "nutrientContentList": "Danh sách chất dinh dưỡng có trong thực phẩm",
+          "amount": "Giá trị",
+          "nutrMin": "Giá trị tối thiểu",
+          "nutrMax": "Giá trị tối đa",
+          "numDataPts": "Giá trị trung bình",
+          "stdError": "Sai số trung bình"
+        },
+        "user": {
+          "username": "Tên người dùng",
+          "fullname": "Tên đầy đủ",
+          "password": "Mật khẩu",
+          "re_password": "Nhập lại mật khẩu",
+          "email": "Địa chỉ email",
+          "enable": "Quyen",
+          "crewIds": "Nhóm người dùng"
+        },
+        "crew": {
+          "name": "Tên nhóm người dùng",
+          "description": "Mô tả ",
+          "spotIds": "Vùng làm việc",
+          "globalRoleIds": "Vai trò"
+        },
+        "spot":{
+          "name": "Vùng làm việc",
+          "description": "Mô tả ",
+          "code": "Mã"
+        },
+        "role":{
+          "name": "Vai trò",
+          "description": "Mô tả ",
+          "code": "Mã",
+          "permissionIds": "Quyền thực thi"
+        }
+      },
+      "titles": {
+        "nutrient":{
+          "title": "Chất dinh dưỡng",
+           "titles": "Chất dinh dưỡng"
+        },
+        "ingredient":{
+          "title": "Thực phẩm",
+          "titles": "Thực phẩm"
+        },
+        "role": {
+          "title":"Vai trò"
+        },
+        "spot": {
+          "title":"Vùng làm việc"
+        },
+        "crew": {
+          "title":"Nhóm người dùng"
+        },
+        "user": {
+          "title":"Người dùng"
+        },
+        "permission": {
+          "title":"Quyền thực thi"
+        }
+      }
+    },
+  "ngAdmin": {
+    "static": {
+      "DELETE": "Xóa",
+      "BACK": "Quay lại",
+      "EDIT": "Sửa",
+      "SAVE": "Lưu",
+      "CANCEL": "Hủy",
+      "SHOW_BUT": "Xem",
+      "SHOW_INF": "Xem thông tin",
+      "SHOW_ALL": "Xem tất cả",
+      "LIST": "Danh sách",
+      "CREATE": "Tạo mới",
+      "CREATE_NEW": "Tạo mới",
+      "SUBMIT":"Lưu",
+      "ARE_SURE":"Bạn có chắc chắn muốn xóa ?",
+      "YES":"Có",
+      "NO":"Không",
+      "SAVE_CHANGES":"Lưu thay đổi",
+      "ACTIONS":"Thao tác",
+      "FILTER":"Lọc tìm ",
+       "DETAIL":"Chi tiết",
+       "DASHBOARD":"Bảng điều khiển",
+       "SHOW_NUTR": "Xem chất dinh dưỡng",
+        "NUTRIX": "Dinh dưỡng"
+
+    },
+    "entities": {
+      "ingredient": "Thực phẩm",
+      "nutrient": "Chất dinh dưỡng",
+      "permission": "Quyền thực thi",
+      "role": "Vai trò",
+      "spot": "Vùng làm việc",
+      "crew": "Nhóm người dùng",
+      "user": "Người dùng"
+    },
+    "notification": {
+      "success": "Quá trình chỉnh sửa thực hiện thành công."
+    }
+  },
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+"load" : {
+  "static" : {
+    "TITLE" : "How to load static files?",
+    "HEADER" : "Tra cứu dinh dưỡng",
+    "SUBHEADER" : "Đồng Diễm Thúy",
+    "TEXT" : "This is only some text to fill the space.",
+    "ONLY_EN": "only english",
+    "EN_RU": "EN and RU - EN Edition"
+  },
+  "predefined" : {
+    "TITLE" : "How to use lazzy loading without autoupload?",
+    "HEADER" : "You can predefine a default language while still using a lazzy loading.",
+    "SUBHEADER" : "This way module will not load a default language from server once more."
+  },
+  "dynamic" : {
+    "TITLE" : "How to load dynamic files?",
+    "HEADER" : "The module can lazzy load a translations table from the dynamic page.",
+    "SUBHEADER" : "It will use the \"lang\" request param passed into GET."
+  }
+}
+}

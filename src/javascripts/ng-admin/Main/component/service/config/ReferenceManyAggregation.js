@@ -10,7 +10,8 @@ define(function (require) {
     var config = {
         name: 'myReference',
         label: 'My references',
-        targetFields : []
+        targetFields : [],
+        relationFields: []
     };
 
     /**
@@ -23,6 +24,7 @@ define(function (require) {
 
         this.config.name = name || 'reference-many-aggregation';
         this.config.type = 'ReferenceManyAggregation';
+        this.config.relationFields = [];
         this.entries = [];
     }
 
@@ -88,25 +90,32 @@ define(function (require) {
      *
      * @returns {Array}
      */
-    ReferenceManyAggregation.prototype.getGridColumns = function () {
+    ReferenceManyAggregation.prototype.getRelationColumns = function () {
         var columns = [],
             field,
             i,
             l;
 
-        for (i = 0, l = this.config.targetFields.length; i < l; i++) {
-            field = this.config.targetFields[i];
-            if (!field.displayed()) {
+        for (i = 0, l = this.config.relationFields.length; i < l; i++) {
+            field = this.config.relationFields[i];
+            if (angular.isDefined(field['displayed']) && field['displayed'] == false)  {
                 continue;
             }
 
-            columns.push({
-                name: field.name(),
-                label: field.label()
-            });
+            columns.push(field);
         }
         console.log(columns);
         return columns;
+    };
+
+    ReferenceManyAggregation.prototype.relationFields = function (relationFields) {
+        if (arguments.length === 0) {
+            return this.config.relationFields;
+        }
+
+        this.config.relationFields = relationFields;
+
+        return this;
     };
 
     return ReferenceManyAggregation;

@@ -23,6 +23,7 @@ define(function (require) {
                     sortField: null,
                     sortDir: null
                 },
+                
                 controller: 'ListController',
                 controllerAs: 'listController',
                 template: listTemplate,

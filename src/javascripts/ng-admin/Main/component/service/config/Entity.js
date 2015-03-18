@@ -25,7 +25,8 @@ define(function (require) {
         showView: null,
         creationView: null,
         editionView: null,
-        deletionView: null
+        deletionView: null,
+        relativePath: null
     };
 
     /**

@@ -6,20 +6,21 @@
 
     <div class="page-header">
         <h1 compile="formController.title">
-            Create new {{ formController.view.entity.name() | humanize:true | singularize }}
+            <!-- Create new {{ formController.view.entity.name() | humanize:true | singularize }} -->
+            {{'ngAdmin.static.CREATE_NEW' | translate}} {{ 'ngAdmin.entities.' + formController.view.entity.name() |translate | humanize:true | singularize  }} 
+
         </h1>
         <p class="lead" ng-if="formController.description">{{ formController.description }}</p>
     </div>
-
 </div>
 
 <div class="row" id="edit-container">
-    <form class="form-horizontal" name="{{ formController.name }}" ng-submit="formController.submitCreation(createForm, $event)">
+    <form class="form-horizontal" name="{{ formController.name}}" ng-submit="formController.submitCreation(createForm, $event)">
         <div class="form-field form-group" ng-include="'ng-admin/Crud/form/edit-attribute.html'" ng-repeat="field in formController.fields | orderElement track by $index"></div>
 
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
-                <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-ok"></span> Submit</button>
+                <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-ok"></span> {{'ngAdmin.static.SUBMIT' | translate}} </button>
             </div>
         </div>
     </form>

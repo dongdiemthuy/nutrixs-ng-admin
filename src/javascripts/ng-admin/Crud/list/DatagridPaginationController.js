@@ -1,4 +1,4 @@
-/*global define*/
+// /*global define*/
 
 define(function () {
     'use strict';
@@ -33,12 +33,67 @@ define(function () {
      * @param {int} max
      * @returns {Array}
      */
-    DatagridPaginationController.prototype.range = function (min, max) {
+    DatagridPaginationController.prototype.rangeOld = function (min, max) {
         var input = [],
             i;
 
         for (i = min; i <= max; i++) {
             input.push(i);
+        }
+
+        return input;
+    };
+
+    DatagridPaginationController.prototype.range = function (min, currentS, max) {
+        var input = [],
+            i;
+        
+        var current = parseInt(currentS);
+        
+        if (max - min < 10) {
+            for (i = min; i <= max; i++) {
+                input.push(i);
+            }
+
+        } else {
+            console.log(min, current, max);
+
+            middleleft = Math.floor((current - 1 - 3)/2);
+         
+            for(i = min; i < min+3; i++) {
+                input.push(i);
+            }
+            if (i < current - 1) {
+                input.push(-i);
+                if (i + 20 < current - 1) {
+                    input.push(Math.floor((current - 1 + i)/2));
+                    input.push(-(current - 2));
+                }
+            }
+
+            for(; i < current - 1; i++) {
+                // if (i == middleleft) {
+                //     input.push(i);    
+                // } 
+                //else
+                //input.push(-i);
+            }
+            for(; ((i < current+3) && (i < max-2)); i++) {
+                input.push(i);
+            }
+            if (i<max-2) {
+                input.push(-i);
+                if (i + 20 < max-2) {
+                    input.push(Math.floor((i + max-2)/2));
+                    input.push(-(max-3));
+                }
+            }
+            for(; i < max - 2; i++) {
+                //input.push(-i);
+            }
+            for(; i<= max; i++) {
+                input.push(i);
+            }
         }
 
         return input;
@@ -87,3 +142,7 @@ define(function () {
 
     return DatagridPaginationController;
 });
+
+
+/*global define*/
+

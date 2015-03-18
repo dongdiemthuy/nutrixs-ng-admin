@@ -19,6 +19,6 @@ define(function () {
             })(propertyName); // for doesn't create a closure, forcing it
         }
     }
-
+    
     return configurable;
 });

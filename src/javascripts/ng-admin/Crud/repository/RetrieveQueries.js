@@ -32,6 +32,9 @@ define(function (require) {
         }
 
         // Get element data
+        if (view.getEntity().relativePath() != null) {
+            this.Restangular.setBaseUrl(this.config.baseApiUrl() + view.getEntity().relativePath());
+        }
         return this.Restangular
             .one(view.getEntity().name(), entityId)
             .get(params, headers)
@@ -122,6 +125,9 @@ define(function (require) {
         }
 
         // Get grid data
+        if (listView.getEntity().relativePath() != null) {
+            this.Restangular.setBaseUrl(this.config.baseApiUrl() + listView.getEntity().relativePath());
+        }
         return this.Restangular
             .all(listView.getEntity().name())
             .getList(params, headers);

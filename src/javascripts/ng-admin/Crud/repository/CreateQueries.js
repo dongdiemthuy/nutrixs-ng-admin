@@ -28,6 +28,9 @@ define(function (require) {
             headers = view.getHeaders();
 
         // Get element data
+        if (view.getEntity().relativePath() != null) {
+            this.Restangular.setBaseUrl(this.config.baseApiUrl() + view.getEntity().relativePath());
+        }
         return this.Restangular
             .restangularizeElement(null, rawEntity, entityName)
             .post(null, rawEntity, null, headers)

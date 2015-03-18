@@ -27,6 +27,27 @@ define(function () {
         this.entity = this.view.getEntity();
 
         $scope.$on('$destroy', this.destroy.bind(this));
+
+        $scope.records = [];
+        
+        // $scope.targets = [
+        //     {
+        //         id: "1",
+        //         name: "name 1"
+        //     },
+        //     {
+        //         id: "2",
+        //         name: "name 2"
+        //     },
+        //     {
+        //         id: "3",
+        //         name: "name 3"
+        //     },
+        //     {
+        //         id: "4",
+        //         name: "name 4"
+        //     },
+        // ];
     };
 
     FormController.prototype.validate = function (form, $event) {
@@ -82,6 +103,7 @@ define(function () {
             progression = this.progression,
             notification = this.notification,
             entity = this.entity,
+            $filter = this.$filter,
             $location = this.$location;
 
         if (!object) {
@@ -92,7 +114,7 @@ define(function () {
             .createOne(this.view, object)
             .then(function (response) {
                 progression.done();
-                notification.log('Changes successfully saved.', {addnCls: 'humane-flatty-success'});
+                notification.log($filter('translate')('ngAdmin.notification.success'), {addnCls: 'humane-flatty-success'});
                 $location.path('/edit/' + entity.name() + '/' + response.identifierValue);
             }, this.handleError.bind(this));
     };
@@ -104,18 +126,23 @@ define(function () {
     FormController.prototype.submitEdition = function (form, $event) {
         var progression = this.progression,
             notification = this.notification,
+            $filter = this.$filter,
             object = this.validate(form, $event);
 
         if (!object) {
             return;
         }
 
+        console.log($filter('translate'));
         this.UpdateQueries
             .updateOne(this.view, object)
-            .then(function () {
-                progression.done();
-                notification.log('Changes successfully saved.', {addnCls: 'humane-flatty-success'});
-            }, this.handleError.bind(this));
+            .then(
+                function () {
+                    progression.done();
+                    notification.log($filter('translate')('ngAdmin.notification.success'), {addnCls: 'humane-flatty-success'});
+                }, 
+                this.handleError.bind(this)
+            );
     };
 
     /**

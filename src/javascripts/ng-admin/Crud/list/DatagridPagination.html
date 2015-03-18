@@ -7,8 +7,9 @@
             <li ng-class="{ disabled: paginationCtrl.currentPage == 1}">
                 <a href ng-click="paginationCtrl.setPage(paginationCtrl.currentPage - 1)">« Prev</a>
             </li>
-            <li ng-repeat="n in paginationCtrl.range(1, paginationCtrl.nbPages)" ng-class="{active: n == paginationCtrl.currentPage}" ng-click="paginationCtrl.setPage(n)">
-                <a href>{{ n }}</a>
+            <li ng-repeat="n in paginationCtrl.range(1, paginationCtrl.currentPage, paginationCtrl.nbPages)" ng-class="{active: n == paginationCtrl.currentPage, disabled: n<0}" ng-click="paginationCtrl.setPage(n)">
+
+                <a href>{{ (n>=0)?n:'...' }}</a>
             </li>
             <li ng-class="{disabled: paginationCtrl.currentPage == paginationCtrl.nbPages}">
                 <a href ng-click="paginationCtrl.setPage(paginationCtrl.currentPage + 1)">Next »</a>

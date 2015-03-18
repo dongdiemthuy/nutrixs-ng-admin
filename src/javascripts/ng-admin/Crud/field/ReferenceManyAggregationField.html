@@ -1,52 +1,41 @@
 
-<div>
+<div >
     <table class="table">
         <tr>
-            <th>Id</th>
-            <th>Name</th>
-            <th>Value</th>
-            <!-- <th>Cost</th> -->
-            <!-- <th>Total</th> -->
+            <th ng-hide= "field['hide']" ng-repeat="field in columns">{{field.label | translate}}</th>
             <th></th>
-            <th></th>
-          
         </tr>
-        <tr ng-repeat="item in records.mtag" ng-include="getTemplate(item)"></tr>
+        <tr ng-hide= "field['hide']" ng-repeat="item in records" ng-include="getTemplate(item)"></tr>
         <tr>
-            <td><a href ng:click="addItem()" class="btn btn-small">Add item</a></td>
             <td></td>
             <td></td>
             <td></td>
+            <th></th>
             <td></td>
-            <!-- <td>Total:</td> -->
-            <!-- <td>{{total() | currency}}</td> -->
         </tr>
     </table>
-    <script type="text/ng-template" id="display">
-    
-        <td>{{item.id}}</td>  
-        <td>{{item.name}}</td>
-        <td>{{item.value}}</td>
-        
-        <td>    
-        <button ng-click="editItem(item)">Edit</button>
-        </td>
-        <td>
-        <button ng:click="removeItem($index)">Delete</button>
-        </td>
-    </script>
 
-    <script type="text/ng-template" id="edit">
-    
-        <td>{{item.id}}</td>  
-        <td><input type="text" ng:model="item.name" class="input-small"></td>
-        <td><input type="text" ng:model="item.value" class="input-small"></td>
-        <td>
-        <button ng:click="saveItem($idx)">Save</button>
+   <script type="text/ng-template" id="display">
+        <td  ng-hide= "field['hide']" ng-repeat="field in columns" ng-switch="checkDataFieldAvailable(item, field)" >
+        <span ng-hide= "field['hide']" ng-switch-when="true">{{item[field['name']]}}</span>
+        <span ng-hide= "field['hide']" ng-switch-when="false">-</span>
+        </td>  
+        <td>    
+        <button class="btn btn-default ng-binding btn-xs" ng-click="editItem(item)">{{ 'ngAdmin.static.EDIT' | translate }}</button>
+        <button class="btn btn-default ng-binding btn-xs" ng-click="removeItem($index)">{{ 'ngAdmin.static.DELETE' | translate }}</button>
         </td>
+  </script>
+
+<script type="text/ng-template" id="edit">
+        <td  ng-hide= "field['hide']" ng-repeat="field in columns" ng-switch="isExpression(field)">
+            <input  ng-hide= "field['hide']" ng-readonly= "field['readonly']" type="{{field.type}}" ng-model="item[field['name']]" class="form-control input-xs" ng-switch-when="false">
+            
+            <span  ng-switch-when="true" ng-if = "checkDataFieldAvailable(item, field) == 'true'"> {{item[field['name']]}}</span>
+            <span  ng-switch-when="true" ng-if = "checkDataFieldAvailable(item, field) == 'false'">-</span>
+        </td>  
         <td>
-        <button ng:click="reset()">Cancel</button>
+        <button class="btn btn-default ng-binding btn-xs" ng:click="saveItem($idx)">{{ 'ngAdmin.static.SAVE' | translate }}</button>
+        <button class="btn btn-default ng-binding btn-xs" ng:click="reset()">{{ 'ngAdmin.static.CANCEL' | translate }}</button>
         </td>
-    </script>
-    <div>Total: {{records.mtag.length}}</div>
+</script>
 </div>
